@@ -8,7 +8,7 @@ import todoRouter from './router/Todos.routes';
 import errorMiddleware from './middlewares/ErrorMiddleware';
 
 export class SetupServer extends Server {
-  constructor(private port = 3000) {
+  constructor(private port = 3001) {
     super();
   }
 

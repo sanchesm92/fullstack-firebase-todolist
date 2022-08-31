@@ -1,20 +1,22 @@
 // import { Controller, Get } from "@overnightjs/core";
 import { Request, Response } from "express";
 import { db } from '@src/firebase'
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc} from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, serverTimestamp, updateDoc, where} from "firebase/firestore";
 import { Itask } from "./interfaces/Itask";
 
 // @Controller('todos')
 export class TodosController {
 
   // @Get('')
-  public async getTodos(_: Request, res: Response): Promise<void> {
+  public async getTodos(req: Request, res: Response): Promise<void> {
+    const {email} = req.query
     try {
       const collectionRef = collection(db, "todos")
-      const docs = await getDocs(collectionRef);
+      const firebaseQuery = query(collectionRef, where("email", "==", email))
+      const docs = await getDocs(firebaseQuery);
       const result: Itask[] = []
       docs.forEach(doc => {
-        result.push({...doc.data(), id: doc.id})
+        result.push({...doc.data(), id: doc.id, timestamp: doc.data().timestamp.toDate().getTime()})
       })
       res.status(200).send(result)
     } catch (error) {
@@ -27,7 +29,7 @@ export class TodosController {
       const { id } = req.params
       const docRef = doc(db, "todos", id);
       const docs = await getDoc(docRef);
-      res.status(200).send(docs.data())
+      res.status(200).send({...docs.data()})
     } catch (error) {
       res.status(400).send({error})
     }
@@ -35,9 +37,9 @@ export class TodosController {
 
   public async createTodos(req: Request, res: Response): Promise<void> {
     try {
-      const {task, details} = req.body;
+      const {task, email} = req.body;
       const collectionRef = collection(db, "todos")
-      await Promise.resolve(addDoc(collectionRef, {task, details}));
+      await Promise.resolve(addDoc(collectionRef, {task, timestamp: serverTimestamp(), email}));
       res.status(201).send({message: 'created'})
     } catch (error) {
       res.status(400).send({error})
@@ -48,10 +50,10 @@ export class TodosController {
   public async updateTodo(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
-      const {task, details} = req.body
+      const {task, email} = req.body
       const docRef = doc(db, "todos", id);
-      await updateDoc(docRef, {id, task, details});
-      res.status(200).send({message: 'updated', body: {id, task, details}})
+      await updateDoc(docRef, {id, task, timestamp: serverTimestamp(), email});
+      res.status(200).send({message: 'updated', body: {id, task, timestamp: serverTimestamp()}})
     } catch (error) {
       res.status(400).send(error)
     }
