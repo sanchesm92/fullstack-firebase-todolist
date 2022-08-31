@@ -5,7 +5,17 @@ jobs:
     name: Evaluator Job
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
+        - name: Verifica o repositório do Git
+          uses: actions/checkout@v2
+
+        - name: Instala o node com a versão
+          uses: actions/setup-node@v1
+          with:
+            node-version: 14
+
+        - name: instalando as dependências
+          run: npm install
+        - uses: actions/checkout@v2
       
-      - name: instalando as dependências
-        run: npm run test:functional
+        - name: instalando as dependências
+          run: npm run test:functional
