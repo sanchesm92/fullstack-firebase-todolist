@@ -12,7 +12,6 @@ jobs:
           with:
             node-version: 14
 
-
         - name: instalando as dependências
           run: npm install
 
