@@ -61,7 +61,7 @@ export default function Login() {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Invalid Fields',
+          text: message,
         })
       });
   }
