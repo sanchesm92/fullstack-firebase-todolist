@@ -21,7 +21,6 @@ export class SetupServer extends Server {
     this.app.use(express.json())
     this.app.use(cors());
     this.app.use(todoRouter)
-    this.app.use(errorMiddleware.validate)
   }
   
   private setupControllers(): void {
