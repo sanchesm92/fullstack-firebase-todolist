@@ -37,11 +37,11 @@ export default function TaskForm() {
   return (
     <div className='flex flex-col w-full'>
       <div className='flex justify-start gap-4'>
-        <button onClick={allFilter}>All</button>
-        <button onClick={completedFilter}>Completed</button>
+        <button className='text-gray-700' onClick={allFilter}>All</button>
+        <button className='text-gray-700' onClick={completedFilter}>Completed</button>
       </div>
       <div className='flex'>
-      <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' type='text' value={taskState} onChange={handleChange} name="task" placeholder='task'  maxLength={30} />
+      <input className='placeholder-gray-700 bg-neutral-100 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' type='text' value={taskState} onChange={handleChange} name="task" placeholder='task'  maxLength={30} />
       <button className="bg-blue-600 hover:bg-blue-400 text-white font-bold py-2 px-4 border border-blue-700 rounded w-24" disabled={taskState === ''} onClick={createTask}>Create</button>
       </div>
     </div>

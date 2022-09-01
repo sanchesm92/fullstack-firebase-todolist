@@ -1,13 +1,10 @@
-// import { Controller, Get } from "@overnightjs/core";
 import { Request, Response } from "express";
 import { db } from '@src/firebase'
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, serverTimestamp, updateDoc, where} from "firebase/firestore";
 import { Itask } from "./interfaces/Itask";
 
-// @Controller('todos')
 export class TodosController {
 
-  // @Get('')
   public async getTodos(req: Request, res: Response): Promise<void> {
     const {email} = req.query
     try {

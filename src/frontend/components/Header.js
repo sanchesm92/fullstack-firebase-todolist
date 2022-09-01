@@ -26,7 +26,7 @@ export default function Header() {
     <div className='p-10 h-12 flex items-center justify-between bg-red-800 text-white shadow-xl'>
       <div className='md: flex items-center gap-6'>
       <Image src={feather} alt="feather logo" />
-      <h1 className='hidden md:inline  text-lg font-bold'>{router.query.email}</h1>
+      <h1 className='hidden md:inline  text-lg font-bold'>{String(router.query.email).split('@')[0]}</h1>
       </div>
       <button onClick={logout}>
         <span className='text-lg font-bold'>

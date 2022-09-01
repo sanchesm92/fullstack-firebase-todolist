@@ -54,10 +54,10 @@ export default function Register() {
       <section className='container mx-auto flex flex-col items-center w-96 h-80 justify-around shadow-xl bg-neutral-50 '>
         <h1 className="text-[#808080] text-5xl">Sign Up</h1>
         <label htmlFor="email">
-        <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='email' value={signup.email} name='email' type="text" placeholder="Email" onChange={(e) => handleChange(e)} />
+        <input className='placeholder-gray-700 bg-neutral-100 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='email' value={signup.email} name='email' type="text" placeholder="Email" onChange={(e) => handleChange(e)} />
         </label>
         <label htmlFor="password">
-        <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='password' value={signup.password} name='password' type="password" placeholder="Password" onChange={(e) => handleChange(e)} />
+        <input className='placeholder-gray-700 bg-neutral-100 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='password' value={signup.password} name='password' type="password" placeholder="Password" onChange={(e) => handleChange(e)} />
         </label>
         <div className='flex justify-between w-60'>
           <button className="bg-blue-600 hover:bg-blue-400 text-white font-bold py-2 px-4 border border-blue-700 rounded w-24" onClick={signUp}>Sign up</button>

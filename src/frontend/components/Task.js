@@ -87,12 +87,12 @@ export default function Task({props}) {
     })
 
   }
-  const uncompletedClass = 'text-md font-bold'
+  const uncompletedClass = 'text-gray-700 text-md font-bold'
   const completedClass = 'text-md font-bold text-red-600 line-through'
   return (
-    <div className='border-b border-slate-300 flex w-full h-12 items-center p-2'>
+    <div className='border-b bg-neutral-50 border-slate-300 flex w-full h-12 items-center p-2'>
       {editing ?
-        <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+        <input className='placeholder-gray-700 bg-neutral-100 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
           value={taksState.task}
           name="task"
           maxLength={30}
