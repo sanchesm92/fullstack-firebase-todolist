@@ -11,7 +11,9 @@
     "start": "npm run build && node dist/src/backend/index.js",
     "start:dev": "ts-node-dev 'src/backend/index.ts'",
     "lint": "eslint ./src ./test --ext .ts",
-    "lint:fix": "eslint ./src ./test --ext .ts --fix"
+    "lint:fix": "eslint ./src ./test --ext .ts --fix",
+    "tsc": "tsc",
+    "postinstall": "npm run tsc"
   },
   "author": "Felipe Sanches Meirelles",
   "license": "ISC",
