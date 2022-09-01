@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test:functional": "jest --projects ./test --runInBand",
-    "build": "tsc && node dist/src/backend/index.js",
+    "build": "tsc",
     "frontend:dev": "cd src/frontend && npm run dev",
     "frontend": "cd src/frontend && npm run build %% npm run dev",
-    "start": "npm run build && node dist/src/index.js",
+    "start": "npm run build && node dist/src/backend/index.js",
     "start:dev": "ts-node-dev 'src/backend/index.ts'",
     "lint": "eslint ./src ./test --ext .ts",
     "lint:fix": "eslint ./src ./test --ext .ts --fix"
