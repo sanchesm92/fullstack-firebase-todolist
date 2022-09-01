@@ -15,7 +15,7 @@ export default function TaskForm() {
       task: taskState,
       email: router.query.email
     }
-    await axios.post('http://localhost:3001/todos', body)
+    await axios.post('https://fullstack-firebase-todolist.herokuapp.com/todos/', body)
     setTaskState('')
   }
 

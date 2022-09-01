@@ -13,7 +13,7 @@ export function Provider({ children }) {
   const getTodos = async () => {
     await axios({
       method: 'get',
-      url: 'http://localhost:3001/todos/',
+      url: 'https://fullstack-firebase-todolist.herokuapp.com/todos/',
       params: { email: router.query.email }
     }).then((r) => {
       const data = r.data.sort((a,b) => a.timestamp - b.timestamp)

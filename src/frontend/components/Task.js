@@ -32,7 +32,7 @@ export default function Task({props}) {
   const putTask = async ({task, email}, id) => {
     await axios({
       method: 'put',
-      url: `http://localhost:3001/todos/${id}`,
+      url: `https://fullstack-firebase-todolist.herokuapp.com/todos/${id}`,
       data: {
         task,
         email
@@ -78,7 +78,7 @@ export default function Task({props}) {
       reverseButtons: true
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await axios.delete(`http://localhost:3001/todos/${id}`)
+        await axios.delete(`https://fullstack-firebase-todolist.herokuapp.com/todos/${id}`)
         getTodos()
         swalWithBootstrapButtons.fire(
           'Deleted!',
