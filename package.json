@@ -12,8 +12,8 @@
     "start:dev": "ts-node-dev 'src/backend/index.ts'",
     "lint": "eslint ./src ./test --ext .ts",
     "lint:fix": "eslint ./src ./test --ext .ts --fix",
-    "tsc": "tsc",
-    "postinstall": "tsc"
+    "tsc": "./node_modules/typescript/bin/tsc",
+    "postinstall": "npm run build"
   },
   "author": "Felipe Sanches Meirelles",
   "license": "ISC",
