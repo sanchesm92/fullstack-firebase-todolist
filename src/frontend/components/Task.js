@@ -13,11 +13,13 @@ export default function Task({props}) {
   const {task, timestamp, id} = props
   const [editing, setEditing] = useState(false)
   const [completed, setCompleted ] = useState(false)
+    //eslint-disable-next-line
   const [state, getTodos, operations] = useProviderContext()
   const [taksState, setTaskState] = useState({
     task: task,
     timestamp: timestamp
   })
+
   const handleChange = ({target}) => {
     setTaskState({...taksState, [target.name]: target.value})
   }
@@ -40,6 +42,7 @@ export default function Task({props}) {
   });
   getTodos()
   }
+
   const toggleCompleted = () => {
     const obj = {
       email: router.query.email,
@@ -51,7 +54,7 @@ export default function Task({props}) {
       const newArr = [...operations.filtredState, obj]
       operations.setFiltredeState(newArr)
     } else {
-      const newArr = operations.filtredState.filter((i) => i.timestamp !== obj.timestamp)
+      const newArr = operations.filtredState.filter((task) => task.timestamp !== obj.timestamp)
       operations.setFiltredeState(newArr)
     }
     setCompleted(!completed)
@@ -88,7 +91,13 @@ export default function Task({props}) {
   const completedClass = 'text-md font-bold text-red-600 line-through'
   return (
     <div className='border-b border-slate-300 flex w-full h-12 items-center p-2'>
-      {editing ? <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' value={taksState.task} name="task" maxLength={30} onChange={handleChange} /> : <p onDoubleClick={toggleCompleted} className={!completed ? uncompletedClass : completedClass}>{task}</p>}
+      {editing ?
+        <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+          value={taksState.task}
+          name="task"
+          maxLength={30}
+          onChange={handleChange}
+          /> : <p onDoubleClick={toggleCompleted} className={!completed ? uncompletedClass : completedClass}>{task}</p>}
       <div className='flex justify-evenly w-1/4 ml-auto gap-4'>
         <button onClick={toggleEditing}>
           <Image width={50} height={50} src={editIcon} alt='edit icon' />

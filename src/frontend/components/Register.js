@@ -12,18 +12,26 @@ export default function Register() {
   const [credential, setCredential] = useState(null)
   const [errMessage, setErrMessage] = useState(null);
   const router = useRouter()
+
   useEffect(() => { firebaseInit() }, [])
+
+  useEffect(() => {
+    if (credential) {
+      router.push('/')
+    }
+    //eslint-disable-next-line
+  }, [credential])
+
+
   const signUp = () => {
     const auth = getAuth();
       createUserWithEmailAndPassword(auth, signup.email, signup.password)
       .then((userCredential) => {
-        // Signed in 
         Swal.fire('Signup complete')
         setCredential(userCredential.user.accessToken)
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
         let message = 'Invalid Fields';
         if(errorCode.includes('email-already-in-use')) {
           message = 'Email Already in Use'
@@ -34,19 +42,13 @@ export default function Register() {
           text: message,
         })
         setErrMessage(message)
-        console.log({code: errorCode, message: errorMessage});
       });
   }
+
   const handleChange = ({target}) => {
     setSignup({...signup, [target.name]: target.value})
   }
 
-  useEffect(() => {
-    if (credential) {
-      router.push('/')
-    }
-    //eslint-disable-next-line
-  }, [credential])
   return (
     <div className='flex h-screen justify-center items-center bg-neutral-100 border-2'>
       <section className='container mx-auto flex flex-col items-center w-96 h-80 justify-around shadow-xl bg-neutral-50 '>

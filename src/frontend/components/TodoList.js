@@ -8,12 +8,14 @@ import TaskForm from "./TaskForm";
 export default function TodoList() {
   const [state, getTodos] = useProviderContext()
   const router = useRouter()
+
     useEffect(() => {
     if(!router.query.token) {
       router.push('/')
     } else {
       getTodos()
     }
+    //eslint-disable-next-line
   },[])
 
   return (

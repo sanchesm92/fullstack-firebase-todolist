@@ -53,14 +53,16 @@ export default function Login() {
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
-        setLogin('Invalid Fields')
+        let message = 'Invalid Fields'
+        if(errorCode.includes('user-not-found')) {
+          message = 'User Not Found'
+        }
+        setLogin(message)
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: 'Invalid Fields',
         })
-        console.log({code: errorCode, message: errorMessage});
       });
   }
 

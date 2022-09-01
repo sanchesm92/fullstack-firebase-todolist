@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
 import feather from '../styles/icons/feather.png'
@@ -7,6 +6,7 @@ import Swal from 'sweetalert2'
 
 export default function Header() {
   const router = useRouter()
+
   const logout = () => {
     Swal.fire({
       title: 'Are you sure?',

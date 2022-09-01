@@ -5,6 +5,7 @@ import { useProviderContext } from '../context/provider';
 
 export default function TaskForm() {
   const router = useRouter()
+  //eslint-disable-next-line
   const [state, getTodos, operations] = useProviderContext()
   const [taskState, setTaskState] = useState('')
   const handleChange = ({target}) => {
@@ -23,6 +24,7 @@ export default function TaskForm() {
     if(taskState === '') {
       getTodos()
     }
+  //eslint-disable-next-line
   },[taskState])
 
   const allFilter = () => {
