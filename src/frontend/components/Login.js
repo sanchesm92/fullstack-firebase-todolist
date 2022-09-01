@@ -6,10 +6,6 @@ import { useRouter } from 'next/router'
 import Link from 'next/link';
 import Swal from 'sweetalert2'
 
-/**
- * 
- * @returns 
- */
 export default function Login() {
   const [user, setUser] = useState({
     email: '',
@@ -19,9 +15,13 @@ export default function Login() {
   const [credential, setCredential] = useState(null)
   const router = useRouter()
 
+/**
+ * @description
+ * this UseEffect verify the credentials and if exists redirect to route /todos
+ */
+
   useEffect(() => {
     if (credential) {
-      localStorage.setItem('fb-todo-user', JSON.stringify({ token: credential.accessToken, email: credential.email }));
       router.push({
         pathname: '/todos',
         query: { token: credential.accessToken, email: credential.email },
@@ -30,14 +30,38 @@ export default function Login() {
     //eslint-disable-next-line
   }, [credential])
 
-  useEffect(() => { firebaseInit() }, [])
+/**
+ * @description
+ * This useEffect will start firebase and firestore
+ */
+
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem('fb-todo-user'));
+    firebaseInit()
+    if(userData) {
+      setUser(userData)
+    }
+  }, [])
+
+/**
+ * @description
+ * useEffect responsible for login if exists the key fb-todo-user in localStorage
+ */
 
   useEffect(() => {
     if (login !== null) {
       setLogin(null)
     }
+    if(user.token) {
+      signIn()
+    }
       //eslint-disable-next-line
   }, [user])
+
+/**
+ * @description
+ * Sign In function responsible for get credentials and login
+ */
 
   const signIn = () => {
     const auth = getAuth();
@@ -50,14 +74,18 @@ export default function Login() {
           timer: 1500
         })
         setCredential(userCredential.user)
+        localStorage.setItem('fb-todo-user', JSON.stringify(
+          { token: userCredential.user.accessToken, email: user.email, password: user.password }
+          ));
       })
       .catch((error) => {
         const errorCode = error.code;
         let message = 'Invalid Fields'
-        if(errorCode.includes('user-not-found')) {
+        if(String(errorCode).includes('user-not-found')) {
           message = 'User Not Found'
         }
         setLogin(message)
+        console.log(errorCode);
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -65,6 +93,11 @@ export default function Login() {
         })
       });
   }
+
+/**
+ * @description
+ * handleChange function responsible for updating user email and password
+ */
 
   const handleChange = ({target}) => {
     setUser({...user, [target.name]: target.value})
@@ -82,7 +115,7 @@ export default function Login() {
         {<p className='text-red-500'>{login}</p>}
         </label>
           <button className="bg-blue-600 hover:bg-blue-400 text-white font-bold py-2 px-4 border border-blue-700 rounded w-3/6" onClick={signIn}>Sign in</button>
-          <span className='text-sm'>{`Don't you have an account? Click to `}<Link href={'/signup'}><spam className='text-blue-600 cursor-pointer'>Sign up</spam></Link></span>
+          <span className='text-sm'>{`Don't you have an account? Click to `}<Link href={'/signup'}><span className='text-blue-600 cursor-pointer'>Sign up</span></Link></span>
       </section>
     </div>
   )

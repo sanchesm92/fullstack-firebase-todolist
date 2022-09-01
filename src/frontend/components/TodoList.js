@@ -10,10 +10,14 @@ export default function TodoList() {
   const [state, getTodos] = useProviderContext()
   const router = useRouter()
 
+/**
+ * @description
+ * useEffect responsible for redirect to route / and get all tasks
+ */
+
     useEffect(() => {
     firebaseInit()
-    const getUser = JSON.parse(localStorage.getItem('fb-todo-user'));
-    if(!router.query.token && !getUser) {
+    if(!router.query.token) {
       router.push('/')
     } else {
       getTodos()

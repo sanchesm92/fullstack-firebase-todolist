@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { useProviderContext } from '../context/provider';
 import Swal from 'sweetalert2'
+const URL = process.env.REACT_APP_URL_ENDPOINT || 'https://fullstack-firebase-todolist.herokuapp.com/todos/'
 
 export default function Task({props}) {
   const router = useRouter();
@@ -16,9 +17,15 @@ export default function Task({props}) {
     timestamp: timestamp
   })
 
+/**
+ * @description
+ * handleChange function responsible for updating taks
+ */
+
   const handleChange = ({target}) => {
     setTaskState({...taksState, [target.name]: target.value})
   }
+
   const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
       confirmButton: 'btn btn-success',
@@ -27,10 +34,15 @@ export default function Task({props}) {
     buttonsStyling: true
   })
 
+/**
+ * @description
+ * putTask function responsible for send http request (PUT) to firestore
+ */
+
   const putTask = async ({task, email}, id) => {
     await axios({
       method: 'put',
-      url: `https://fullstack-firebase-todolist.herokuapp.com/todos/${id}`,
+      url: `${URL}${id}`,
       data: {
         task,
         email
@@ -38,6 +50,11 @@ export default function Task({props}) {
   });
   getTodos()
   }
+
+/**
+ * @description
+ * toggleCompleted function responsible for set completed/uncompleted task
+ */
 
   const toggleCompleted = () => {
     const obj = {
@@ -55,6 +72,12 @@ export default function Task({props}) {
     }
     setCompleted(!completed)
   }
+
+/**
+ * @description
+ * toggleEditing function responsible for editing task
+ */
+
   const toggleEditing = () => {
     if (editing === true) {
       const body = {
@@ -65,6 +88,11 @@ export default function Task({props}) {
     }
     setEditing(!editing)
   }
+
+/**
+ * @description
+ * deleteTask function responsible for send http request (DELETE) to firestore
+ */
 
   const deleteTask = async () => {
     swalWithBootstrapButtons.fire({
@@ -77,7 +105,7 @@ export default function Task({props}) {
       reverseButtons: true
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await axios.delete(`https://fullstack-firebase-todolist.herokuapp.com/todos/${id}`)
+        await axios.delete(`${URL}${id}`)
         getTodos()
       }
     })

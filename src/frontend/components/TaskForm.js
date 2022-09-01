@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { useProviderContext } from '../context/provider';
+const URL = process.env.REACT_APP_URL_ENDPOINT || 'https://fullstack-firebase-todolist.herokuapp.com/todos/'
 
 export default function TaskForm() {
   const router = useRouter()
@@ -11,14 +12,25 @@ export default function TaskForm() {
   const handleChange = ({target}) => {
     setTaskState(target.value)
   }
+
+/**
+ * @description
+ * createTask function responsible for send http request (POST) to firestore
+ */
+
   const createTask = async () => {
     const body = {
       task: taskState,
       email: router.query.email
     }
-    await axios.post('https://fullstack-firebase-todolist.herokuapp.com/todos/', body)
+    await axios.post(URL, body)
     setTaskState('')
   }
+
+/**
+ * @description
+ * useEffect responsible for get all tasks in firestore
+ */
 
   useEffect(() => {
     if(taskState === '') {
@@ -27,9 +39,19 @@ export default function TaskForm() {
   //eslint-disable-next-line
   },[taskState])
 
+/**
+* @description
+* allFilter responsible for filter all tasks
+*/
+
   const allFilter = () => {
     getTodos()
   }
+
+/**
+* @description
+* completedFilter responsible for filter complete tasks
+*/
 
   const completedFilter = () => {
     operations.setState(operations.filtredState)

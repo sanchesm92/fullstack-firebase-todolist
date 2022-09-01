@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import { createContext, useContext, useState } from "react";
-
+const URL = process.env.REACT_APP_URL_ENDPOINT || 'https://fullstack-firebase-todolist.herokuapp.com/todos/'
 const Context = createContext();
 
 export function Provider({ children }) {
@@ -18,7 +18,7 @@ export function Provider({ children }) {
     }
     await axios({
       method: 'get',
-      url: 'https://fullstack-firebase-todolist.herokuapp.com/todos/',
+      url: URL,
       params: { email }
     }).then((r) => {
       const data = r.data.sort((a,b) => a.timestamp - b.timestamp)

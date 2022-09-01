@@ -10,9 +10,8 @@ const express_1 = __importDefault(require("express"));
 const todos_controller_1 = require("./controller/todos.controller");
 const cors_1 = __importDefault(require("cors"));
 const Todos_routes_1 = __importDefault(require("./router/Todos.routes"));
-const ErrorMiddleware_1 = __importDefault(require("./middlewares/ErrorMiddleware"));
 class SetupServer extends core_1.Server {
-    constructor(port = 3001) {
+    constructor(port = process.env.PORT || 3001) {
         super();
         this.port = port;
     }
@@ -24,7 +23,6 @@ class SetupServer extends core_1.Server {
         this.app.use(express_1.default.json());
         this.app.use((0, cors_1.default)());
         this.app.use(Todos_routes_1.default);
-        this.app.use(ErrorMiddleware_1.default.validate);
     }
     setupControllers() {
         const todosController = new todos_controller_1.TodosController();

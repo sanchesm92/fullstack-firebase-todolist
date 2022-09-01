@@ -8,6 +8,11 @@ export default function Header() {
   const router = useRouter()
   const [emailState, setEmailState] = useState('')
 
+/**
+* @description
+* useEffect responsible for set user name
+*/
+
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('fb-todo-user'))
     let email = router.query.email
@@ -17,6 +22,11 @@ export default function Header() {
     setEmailState(String(email).split('@')[0])
     //eslint-disable-next-line
   },[])
+
+/**
+* @description
+* logout responsible for logout
+*/
 
   const logout = () => {
     Swal.fire({

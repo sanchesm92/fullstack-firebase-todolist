@@ -13,7 +13,17 @@ export default function Register() {
   const [errMessage, setErrMessage] = useState(null);
   const router = useRouter()
 
+/**
+ * @description
+ * This useEffect will start firebase and firestore
+ */
+
   useEffect(() => { firebaseInit() }, [])
+
+/**
+ * @description
+ * this UseEffect verify the credentials and if exists redirect to route /
+ */
 
   useEffect(() => {
     if (credential) {
@@ -22,6 +32,10 @@ export default function Register() {
     //eslint-disable-next-line
   }, [credential])
 
+/**
+ * @description
+ * Sign In function responsible for create a new user with email and password
+ */
 
   const signUp = () => {
     const auth = getAuth();
@@ -51,6 +65,11 @@ export default function Register() {
         setErrMessage(message)
       });
   }
+
+/**
+ * @description
+ * handleChange function responsible for updating user email and password
+ */
 
   const handleChange = ({target}) => {
     setSignup({...signup, [target.name]: target.value})
