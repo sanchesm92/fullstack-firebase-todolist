@@ -21,6 +21,7 @@ export default function Login() {
 
   useEffect(() => {
     if (credential) {
+      localStorage.setItem('fb-todo-user', JSON.stringify({ token: credential.accessToken, email: credential.email }));
       router.push({
         pathname: '/todos',
         query: { token: credential.accessToken, email: credential.email },
@@ -82,7 +83,6 @@ export default function Login() {
         </label>
           <button className="bg-blue-600 hover:bg-blue-400 text-white font-bold py-2 px-4 border border-blue-700 rounded w-3/6" onClick={signIn}>Sign in</button>
           <span className='text-sm'>{`Don't you have an account? Click to `}<Link href={'/signup'}><spam className='text-blue-600 cursor-pointer'>Sign up</spam></Link></span>
-        
       </section>
     </div>
   )

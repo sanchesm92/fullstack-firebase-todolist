@@ -1,12 +1,8 @@
 import axios from 'axios';
-import Image from 'next/image';
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { useProviderContext } from '../context/provider';
-import editIcon from '../styles/icons/editIcon.png'
-import deleteIcon from '../styles/icons/deleteIcon.png'
 import Swal from 'sweetalert2'
-
 
 export default function Task({props}) {
   const router = useRouter();
@@ -51,15 +47,14 @@ export default function Task({props}) {
       timestamp,
     }
     if(!completed) {
-      const newArr = [...operations.filtredState, obj]
-      operations.setFiltredeState(newArr)
+      const filtredTasks = [...operations.filtredState, obj]
+      operations.setFiltredeState(filtredTasks)
     } else {
       const newArr = operations.filtredState.filter((task) => task.timestamp !== obj.timestamp)
       operations.setFiltredeState(newArr)
     }
     setCompleted(!completed)
   }
-
   const toggleEditing = () => {
     if (editing === true) {
       const body = {
@@ -70,6 +65,7 @@ export default function Task({props}) {
     }
     setEditing(!editing)
   }
+
   const deleteTask = async () => {
     swalWithBootstrapButtons.fire({
       title: 'Are you sure?',
@@ -85,10 +81,10 @@ export default function Task({props}) {
         getTodos()
       }
     })
-
   }
   const uncompletedClass = 'text-gray-700 text-md font-bold'
   const completedClass = 'text-md font-bold text-red-600 line-through'
+
   return (
     <div className='border-b bg-neutral-50 border-slate-300 flex w-full h-12 items-center p-2'>
       {editing ?
@@ -100,11 +96,12 @@ export default function Task({props}) {
           /> : <p className={!completed ? uncompletedClass : completedClass}>{task}</p>}
       <div className='flex justify-evenly w-1/4 ml-auto gap-4'>
         <button onClick={toggleEditing}>
-          <Image width={50} height={50} src={editIcon} alt='edit icon' />
+          📝
         </button>
-        <button onClick={toggleCompleted} >{completed ? '❌' : '✅'}</button>
+        <button onClick={toggleCompleted} className='text-center' >{completed ? 
+          '🔴' : '⚪'}</button>
         <button onClick={deleteTask}>
-          <Image height={20} width={20} src={deleteIcon} alt='edit icon' />
+          🗑️
         </button>
       </div>
     </div>

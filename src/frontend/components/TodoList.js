@@ -4,13 +4,16 @@ import Header from "./Header";
 import Task from "./Task";
 import { useProviderContext } from "../context/provider";
 import TaskForm from "./TaskForm";
+import { firebaseInit } from "../firebase";
 
 export default function TodoList() {
   const [state, getTodos] = useProviderContext()
   const router = useRouter()
 
     useEffect(() => {
-    if(!router.query.token) {
+    firebaseInit()
+    const getUser = JSON.parse(localStorage.getItem('fb-todo-user'));
+    if(!router.query.token && !getUser) {
       router.push('/')
     } else {
       getTodos()

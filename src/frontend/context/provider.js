@@ -11,16 +11,21 @@ export function Provider({ children }) {
   const [darkmode, setDarkmode] = useState(false);
 
   const getTodos = async () => {
+    const user = JSON.parse(localStorage.getItem('fb-todo-user'))
+    let email = router.query.email;
+    if(user) {
+      email = router.query.email || user.email
+    }
     await axios({
       method: 'get',
       url: 'https://fullstack-firebase-todolist.herokuapp.com/todos/',
-      params: { email: router.query.email }
+      params: { email }
     }).then((r) => {
       const data = r.data.sort((a,b) => a.timestamp - b.timestamp)
       setState(data);
-      
     })
   }
+
 const operations = {
   darkmode,
   setDarkmode,
