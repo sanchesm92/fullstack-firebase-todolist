@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test:functional": "jest --projects ./test --runInBand",
-    "build": "tsc",
+    "build": "ts-node-dev 'src/backend/index.ts",
     "frontend:dev": "cd src/frontend && npm run dev",
     "frontend": "cd src/frontend && npm run build %% npm run dev",
     "start": "npm run build && node dist/src/index.js",
