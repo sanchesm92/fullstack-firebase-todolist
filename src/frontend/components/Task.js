@@ -97,11 +97,12 @@ export default function Task({props}) {
           name="task"
           maxLength={30}
           onChange={handleChange}
-          /> : <p onDoubleClick={toggleCompleted} className={!completed ? uncompletedClass : completedClass}>{task}</p>}
+          /> : <p className={!completed ? uncompletedClass : completedClass}>{task}</p>}
       <div className='flex justify-evenly w-1/4 ml-auto gap-4'>
         <button onClick={toggleEditing}>
           <Image width={50} height={50} src={editIcon} alt='edit icon' />
         </button>
+        <button onClick={toggleCompleted} >{completed ? '❌' : '✅'}</button>
         <button onClick={deleteTask}>
           <Image height={20} width={20} src={deleteIcon} alt='edit icon' />
         </button>

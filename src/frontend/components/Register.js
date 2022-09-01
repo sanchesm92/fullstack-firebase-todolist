@@ -32,9 +32,16 @@ export default function Register() {
       })
       .catch((error) => {
         const errorCode = error.code;
+        console.log(errorCode);
         let message = 'Invalid Fields';
         if(errorCode.includes('email-already-in-use')) {
           message = 'Email Already in Use'
+        }
+        if(!signup.email.includes('@')) {
+          message = 'Invalid Email'
+        }
+        if(signup.password.length < 6) {
+          message = 'The password must be at least 6 characters'
         }
         Swal.fire({
           icon: 'error',
