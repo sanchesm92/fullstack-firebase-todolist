@@ -25,8 +25,8 @@ const operations = {
   darkmode,
   setDarkmode,
   filtredState,
-  setFiltredeState,//ir add ou remover os completos
-  setState, // qdo clicar no completed seta o estado com o filtred
+  setFiltredeState,
+  setState,
 }
   return (
     <Context.Provider value={[state, getTodos, operations]}>{children}</Context.Provider>

@@ -80,20 +80,6 @@ export default function Task({props}) {
       if (result.isConfirmed) {
         await axios.delete(`https://fullstack-firebase-todolist.herokuapp.com/todos/${id}`)
         getTodos()
-        swalWithBootstrapButtons.fire(
-          'Deleted!',
-          'Your task has been deleted.',
-          'success'
-        )
-      } else if (
-        /* Read more about handling dismissals below */
-        result.dismiss === Swal.DismissReason.cancel
-      ) {
-        swalWithBootstrapButtons.fire(
-          'Cancelled',
-          'Your task is safe!',
-          'error'
-        )
       }
     })
 
