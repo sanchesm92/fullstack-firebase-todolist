@@ -4,9 +4,6 @@ import { Router } from 'express';
 import errorMiddleware from '../middlewares/ErrorMiddleware';
 
 const todoRouter = Router();
-/**
- * @params
- */
 const todoController = new TodosController();
 
 todoRouter.get('/', (req, res) => res.status(200).json({message: 'Wellcome to todolist firebase'}));

@@ -3,8 +3,12 @@ import { Server } from '@overnightjs/core';
 import express, { Application } from 'express'
 import { TodosController } from './controller/todos.controller';
 import cors from 'cors';
-
 import todoRouter from './router/Todos.routes';
+
+/**
+* @class
+* Server class
+*/
 
 export class SetupServer extends Server {
   constructor(private port = process.env.PORT || 3001) {

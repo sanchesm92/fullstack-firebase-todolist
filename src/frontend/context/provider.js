@@ -10,6 +10,11 @@ export function Provider({ children }) {
   const router = useRouter();
   const [darkmode, setDarkmode] = useState(false);
 
+/**
+* @description
+* getTodos responsible for get all tasks
+*/
+
   const getTodos = async () => {
     const user = JSON.parse(localStorage.getItem('fb-todo-user'))
     let email = router.query.email;
@@ -33,6 +38,7 @@ const operations = {
   setFiltredeState,
   setState,
 }
+
   return (
     <Context.Provider value={[state, getTodos, operations]}>{children}</Context.Provider>
   );

@@ -1,5 +1,10 @@
 import { Request, Response } from "express";
 
+/**
+* @description
+* Handler error middleware
+*/
+
 export default class errorMiddleware {
     //eslint-disable-next-line
   public static validate = (err: any, req: Request, res: Response) => {
