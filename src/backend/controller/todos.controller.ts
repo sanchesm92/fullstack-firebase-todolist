@@ -41,7 +41,7 @@ export class TodosController {
     try {
       const {task, email} = req.body;
       const collectionRef = collection(db, "todos")
-      await Promise.resolve(addDoc(collectionRef, {task, timestamp: serverTimestamp(), email}));
+      await Promise.resolve(addDoc(collectionRef, {task, timestamp: serverTimestamp(), email, completed: false}));
       res.status(201).send({message: 'created'})
     } catch (error) {
       res.status(400).send({error})
@@ -52,9 +52,9 @@ export class TodosController {
   public async updateTodo(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
-      const {task, email} = req.body
+      const {task, email, completed} = req.body
       const docRef = doc(db, "todos", id);
-      await updateDoc(docRef, {id, task, timestamp: serverTimestamp(), email});
+      await updateDoc(docRef, {id, task, timestamp: serverTimestamp(), email, completed});
       res.status(200).send({message: 'updated', body: {id, task, timestamp: serverTimestamp()}})
     } catch (error) {
       res.status(400).send(error)

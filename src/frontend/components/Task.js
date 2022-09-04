@@ -13,8 +13,7 @@ export default function Task({props}) {
     //eslint-disable-next-line
   const [state, getTodos, operations] = useProviderContext()
   const [taksState, setTaskState] = useState({
-    task: task,
-    timestamp: timestamp
+    task: task
   })
 
 /**
@@ -56,12 +55,13 @@ export default function Task({props}) {
  * toggleCompleted function responsible for set completed/uncompleted task
  */
 
-  const toggleCompleted = () => {
+  const toggleCompleted = async () => {
     const obj = {
       email: router.query.email,
       id,
       task,
       timestamp,
+      completed
     }
     if(!completed) {
       const filtredTasks = [...operations.filtredState, obj]
@@ -70,6 +70,7 @@ export default function Task({props}) {
       const newArr = operations.filtredState.filter((task) => task.timestamp !== obj.timestamp)
       operations.setFiltredeState(newArr)
     }
+    putTask({task, email: router.query.email, completed: !completed}, id)
     setCompleted(!completed)
   }
 
