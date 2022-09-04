@@ -1,15 +1,15 @@
 import axios from 'axios';
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useProviderContext } from '../context/provider';
 import Swal from 'sweetalert2'
 const URL = process.env.REACT_APP_URL_ENDPOINT || 'https://fullstack-firebase-todolist.herokuapp.com/todos/'
 
 export default function Task({props}) {
   const router = useRouter();
-  const {task, timestamp, id} = props
+  const {task, id} = props
   const [editing, setEditing] = useState(false)
-  const [completed, setCompleted ] = useState(false)
+  const [completed, setCompleted ] = useState(props.completed)
     //eslint-disable-next-line
   const [state, getTodos, operations] = useProviderContext()
   const [taksState, setTaskState] = useState({
@@ -55,24 +55,19 @@ export default function Task({props}) {
  */
 
   const toggleCompleted = async () => {
-    const obj = {
-      email: router.query.email,
-      id,
-      task,
-      timestamp,
-      completed
-    }
-    if(!completed) {
-      const filtredTasks = [...operations.filtredState, obj]
-      operations.setFiltredeState(filtredTasks)
-    } else {
-      const newArr = operations.filtredState.filter((task) => task.timestamp !== obj.timestamp)
-      operations.setFiltredeState(newArr)
-    }
     await putTask({task, email: router.query.email, completed: !completed}, id)
     setCompleted(!completed)
   }
 
+  // useEffect(() => {
+  //   operations.updateFilteredState()
+  //   //eslint-disable-next-line
+  // }, [completed])
+
+  useEffect(() => {
+    operations.updateFilteredState()
+    //eslint-disable-next-line
+  }, [])
 /**
  * @description
  * toggleEditing function responsible for editing task

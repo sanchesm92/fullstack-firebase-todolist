@@ -28,14 +28,21 @@ export function Provider({ children }) {
     }).then((r) => {
       const data = r.data.sort((a,b) => a.timestamp - b.timestamp)
       setState(data);
+      const newState = data.filter((i) => i.completed === true)
+      setFiltredeState(newState)
     })
+  }
+
+  const updateFilteredState = () => {
+    const newState = state.filter((i) => i.completed === true)
+    setFiltredeState(newState)
   }
 
 const operations = {
   darkmode,
   setDarkmode,
   filtredState,
-  setFiltredeState,
+  updateFilteredState,
   setState,
 }
 
