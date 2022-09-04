@@ -38,13 +38,12 @@ export default function Task({props}) {
  * putTask function responsible for send http request (PUT) to firestore
  */
 
-  const putTask = async ({task, email}, id) => {
+  const putTask = async (body, id) => {
     await axios({
       method: 'put',
       url: `${URL}${id}`,
       data: {
-        task,
-        email
+        ...body
       }
   });
   getTodos()
@@ -70,7 +69,7 @@ export default function Task({props}) {
       const newArr = operations.filtredState.filter((task) => task.timestamp !== obj.timestamp)
       operations.setFiltredeState(newArr)
     }
-    putTask({task, email: router.query.email, completed: !completed}, id)
+    await putTask({task, email: router.query.email, completed: !completed}, id)
     setCompleted(!completed)
   }
 
