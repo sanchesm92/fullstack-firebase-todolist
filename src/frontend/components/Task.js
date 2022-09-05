@@ -73,13 +73,14 @@ export default function Task({props}) {
  * toggleEditing function responsible for editing task
  */
 
-  const toggleEditing = () => {
+  const toggleEditing = async () => {
     if (editing === true) {
       const body = {
         task: taksState.task,
-        email: router.query.email
+        email: router.query.email,
+        completed: completed
       }
-      putTask(body, id)
+      await putTask(body, id)
     }
     setEditing(!editing)
   }

@@ -52,9 +52,9 @@ export class TodosController {
   public async updateTodo(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
-      const {task, email, completed} = req.body
+      const {task, completed} = req.body
       const docRef = doc(db, "todos", id);
-      await updateDoc(docRef, {id, task, timestamp: serverTimestamp(), email, completed});
+      await updateDoc(docRef, {task, completed});
       res.status(200).send({message: 'updated', body: {id, task, timestamp: serverTimestamp()}})
     } catch (error) {
       res.status(400).send(error)
