@@ -118,11 +118,11 @@ export default function Task({props}) {
         <button onClick={toggleEditing}>
           {!completed ? '📝' : '✅'}
         </button>
-        {!completed && <button onClick={toggleCompleted} className='text-center' >{completed ? 
-          '🔴' : '⚪'}</button>}
-        {!completed && <button onClick={deleteTask}>
+        <button onClick={toggleCompleted} className='text-center' >{completed ? 
+          '🔴' : '⚪'}</button>
+        <button onClick={deleteTask}>
           🗑️
-        </button>}
+        </button>
       </div>
     </div>
   )
