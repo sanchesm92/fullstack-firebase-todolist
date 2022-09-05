@@ -40,8 +40,16 @@ export class TodosController {
   public async createTodos(req: Request, res: Response): Promise<void> {
     try {
       const {task, email} = req.body;
+
+      const getAllRef = collection(db, "todos")
+      const firebaseQuery = query(getAllRef, where("email", "==", email))
+      const docs = await getDocs(firebaseQuery);
+      const result: Itask[] = []
+      docs.forEach(doc => {
+        result.push({...doc.data(), id: doc.id, timestamp: doc.data().timestamp.toDate().getTime()})
+      })
       const collectionRef = collection(db, "todos")
-      await Promise.resolve(addDoc(collectionRef, {task, timestamp: serverTimestamp(), email, completed: false}));
+      await Promise.resolve(addDoc(collectionRef, {task, timestamp: serverTimestamp(), email, completed: false, orderNumber: result.length }));
       res.status(201).send({message: 'created'})
     } catch (error) {
       res.status(400).send({error})
@@ -55,7 +63,7 @@ export class TodosController {
       const {task, completed} = req.body
       const docRef = doc(db, "todos", id);
       await updateDoc(docRef, {task, completed});
-      res.status(200).send({message: 'updated', body: {id, task, timestamp: serverTimestamp()}})
+      res.status(200).send({message: 'updated', body: {id, task, completed}})
     } catch (error) {
       res.status(400).send(error)
     }

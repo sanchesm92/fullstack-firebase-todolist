@@ -2,6 +2,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { createContext, useContext, useState } from "react";
 const URL = process.env.REACT_APP_URL_ENDPOINT || 'https://fullstack-firebase-todolist.herokuapp.com/todos/'
+
 const Context = createContext();
 
 export function Provider({ children }) {
@@ -26,7 +27,7 @@ export function Provider({ children }) {
       url: URL,
       params: { email }
     }).then((r) => {
-      const data = r.data.sort((a,b) => a.timestamp - b.timestamp)
+      const data = r.data.sort((a,b) => a.orderNumber - b.orderNumber)
       setState(data);
       const newState = data.filter((i) => i.completed === true)
       setFiltredeState(newState)

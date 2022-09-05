@@ -5,6 +5,7 @@ import { useProviderContext } from '../context/provider';
 import Swal from 'sweetalert2'
 const URL = process.env.REACT_APP_URL_ENDPOINT || 'https://fullstack-firebase-todolist.herokuapp.com/todos/'
 
+
 export default function Task({props}) {
   const router = useRouter();
   const {task, id} = props
@@ -58,11 +59,6 @@ export default function Task({props}) {
     await putTask({task, email: router.query.email, completed: !completed}, id)
     setCompleted(!completed)
   }
-
-  // useEffect(() => {
-  //   operations.updateFilteredState()
-  //   //eslint-disable-next-line
-  // }, [completed])
 
   useEffect(() => {
     operations.updateFilteredState()
