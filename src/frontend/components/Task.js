@@ -116,13 +116,13 @@ export default function Task({props}) {
           /> : <p className={!completed ? uncompletedClass : completedClass}>{task}</p>}
       <div className='flex justify-evenly w-1/4 ml-auto gap-4'>
         <button onClick={toggleEditing}>
-          {!completed ? '📝' : '✅'}
+          {!editing ? '📝' : '✅'}
         </button>
-        <button onClick={toggleCompleted} className='text-center' >{completed ? 
-          '🔴' : '⚪'}</button>
-        <button onClick={deleteTask}>
+        {!editing && <button onClick={toggleCompleted} className='text-center' >{completed ? 
+          '🔴' : '⚪'}</button>}
+        {!editing && <button onClick={deleteTask}>
           🗑️
-        </button>
+        </button>}
       </div>
     </div>
   )
