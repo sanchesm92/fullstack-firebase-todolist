@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 
 /**
 * @description
-* Handler error middleware
+* Middleware de error responsável por tratar os erros, evitando a aplicação de quebrar durante alguma requisição HTTP
 */
 
 export default class errorMiddleware {

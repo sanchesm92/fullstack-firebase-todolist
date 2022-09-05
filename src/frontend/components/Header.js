@@ -44,6 +44,7 @@ export default function Header() {
     })
 
   }
+
   return (
     <div className='p-10 h-12 flex items-center justify-between bg-red-800 text-white shadow-xl'>
       <div className='md: flex items-center gap-6'>

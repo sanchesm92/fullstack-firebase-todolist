@@ -3,7 +3,7 @@ import * as Joi from "joi";
 
 /**
 * @description
-* Validate middleware
+* Middleware de validação de dados recebidos via requisições HTTP, utilizando a biblioteca joi
 */
 
 export default class ValidateTask {

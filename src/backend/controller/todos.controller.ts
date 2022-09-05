@@ -9,7 +9,10 @@ import { Itask } from "./interfaces/Itask";
 */
 
 export class TodosController {
-
+/**
+ * @description
+ * Controller para requisição HTTP do tipo GET para /todos
+ */
   public async getTodos(req: Request, res: Response): Promise<void> {
     const {email} = req.query
     try {
@@ -25,7 +28,10 @@ export class TodosController {
       res.status(400).send({error})
     }
   }
-
+/**
+ * @description
+ * Controller para requisição HTTP do tipo GET para /todos/:id
+ */
   public async getTodoById(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params
@@ -36,7 +42,10 @@ export class TodosController {
       res.status(400).send({error})
     }
   }
-
+/**
+ * @description
+ * Controller para requisição HTTP do tipo POST para /todos
+ */
   public async createTodos(req: Request, res: Response): Promise<void> {
     try {
       const {task, email} = req.body;
@@ -56,7 +65,10 @@ export class TodosController {
     }
 
   }
-
+/**
+ * @description
+ * Controller para requisição HTTP do tipo PUT para /todos
+ */
   public async updateTodo(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
@@ -68,7 +80,10 @@ export class TodosController {
       res.status(400).send(error)
     }
   }
-
+/**
+ * @description
+ * Controller para requisição HTTP do tipo DELETE para /todos
+ */
   public async deleteTodos(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
