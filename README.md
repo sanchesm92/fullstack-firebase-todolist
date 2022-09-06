@@ -3,8 +3,8 @@
 
 A simple FullStack Todolist built with Node.js, Typescript, firebase, javascript, nextjs, tailwind.
 
-Frontend deployed at https://fullstack-firebase-todolist.vercel.app/
-Backend deployed at https://dashboard.heroku.com/apps/fullstack-firebase-todolist
+- Frontend deployed at https://fullstack-firebase-todolist.vercel.app/
+- Backend deployed at https://dashboard.heroku.com/apps/fullstack-firebase-todolist
 
 # FrontEnd
 
